@@ -28,7 +28,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = 'django-insecure-3*$@gj#5^=377pvg08r0s9%yv81yz-_k21ob$2e25(9z_*%-&r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS 需要允许所有主机访问
 ALLOWED_HOSTS = ['*']
@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     "apps.staff",
     "apps.image",
     'apps.home',
+    'apps.task',
+    'apps.salary',
 ]
 
 MIDDLEWARE = [
@@ -138,7 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT =  '/www/staticfiles'
+STATIC_ROOT = '/www/staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
@@ -192,6 +194,13 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=30),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=7),
 }
+
+# GitHub OAuth配置
+GITHUB_CLIENT_ID = env.str('GITHUB_CLIENT_ID', 'Ov23lijToy0eArJkqJD3')
+GITHUB_CLIENT_SECRET = env.str(
+    'GITHUB_CLIENT_SECRET', '256a789842ccc5338f6ffa2ce0ca9af4e9387df8')
+GITHUB_CALLBACK_URL = env.str(
+    'GITHUB_CALLBACK_URL', 'http://localhost:5173/oaauth/github/callback')
 
 # 邮箱配置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

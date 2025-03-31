@@ -52,8 +52,7 @@ onMounted(() => {
   defaultActive.value = router.currentRoute.value.name
   displayUser.department = authStore.user.department
   displayUser.realname = authStore.user.username
-//   console.log(authStore.user.avatar);
-  
+  //   console.log(authStore.user.avatar);
 })
 
 const onCollapseAside = () => {
@@ -62,7 +61,7 @@ const onCollapseAside = () => {
 
 const onExit = () => {
   authStore.clearUserToken()
-  router.push({ name: 'login' })
+  //   router.push({ name: 'login' })
 }
 
 const onControlResetPwdDialog = () => {
@@ -127,7 +126,7 @@ const onSubmitProfile = async () => {
     profileDialogVisible.value = false
     // 更新显示的用户信息
     displayUser.realname = profileForm.username
-    authStore.user.avatar = profileForm.avatar  // 更新头像
+    authStore.user.avatar = profileForm.avatar // 更新头像
   } catch (detail) {
     ElMessage.error(detail)
   }
@@ -140,11 +139,11 @@ const handleAvatarChange = async (file) => {
     ElMessage.error('头像图片大小不能超过 2MB!')
     return
   }
-  
+
   // 创建 FormData
   const formData = new FormData()
   formData.append('image', file.raw)
-  
+
   try {
     const result = await homeHttp.uploadImage(formData)
     if (result.errno === 0) {
@@ -228,12 +227,16 @@ const handleAvatarChange = async (file) => {
         <el-dropdown>
           <span class="el-dropdown-link">
             <div class="user-info">
-              <el-avatar 
-                :size="30" 
-                :src="authStore.user.avatar" 
+              <el-avatar
+                :size="30"
+                :src="authStore.user.avatar"
                 :icon="!authStore.user.avatar ? 'UserFilled' : ''"
               />
-              <span class="user-name">[{{ displayUser.department.name }}]{{ displayUser.realname }}</span>
+              <span class="user-name"
+                >[{{ displayUser.department.name }}]{{
+                  displayUser.realname
+                }}</span
+              >
             </div>
             <el-icon class="el-icon--right"><arrow-down /></el-icon>
           </span>

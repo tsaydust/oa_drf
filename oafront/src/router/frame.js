@@ -124,6 +124,37 @@ const routes = [
           },
         ],
       },
+      {
+        path: '/task',
+        name: 'task',
+        component: () => import('@/views/task/index.vue'),
+        meta: {
+          icon: 'Calendar', // 改用日历图标表示任务管理
+          text: '工作管理',
+        },
+        children: [
+          {
+            path: 'list',
+            name: 'task_list',
+            component: () => import('@/views/task/list.vue'),
+            meta: {
+              icon: 'Tickets', // 改用票据图标表示任务列表
+              text: '任务列表',
+              requiresEmployee: true,
+            },
+          },
+          {
+            path: 'salary',
+            name: 'task_salary',
+            component: () => import('@/views/salary/list.vue'),
+            meta: {
+              icon: 'Money',
+              text: '薪资列表',
+              requiresManager: true,
+            },
+          },
+        ],
+      },
     ],
   },
 ]

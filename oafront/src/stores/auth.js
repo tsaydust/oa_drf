@@ -29,6 +29,8 @@ export const useAuthStore = defineStore('auth', () => {
     localStorage.removeItem(USER_KEY)
     localStorage.removeItem(TOKEN_KEY)
     localStorage.removeItem(REFRESH_KEY)
+    // 触发路由重新计算
+    window.location.reload()
   }
 
   // 计算属性

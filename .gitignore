@@ -3,8 +3,8 @@ __pycache__/
 *.pyc
 
 .idea/
-media/*   # 忽略 media 文件夹中的所有内容
-!media/.gitkeep  # 但保留 media 目录（使用 .gitkeep 作为占位文件）
+oaback/media/*   # 忽略 media 文件夹中的所有内容
+!oaback/media/.gitkeep  # 但保留 media 目录（使用 .gitkeep 作为占位文件）
 
 # Logs
 logs

@@ -20,10 +20,10 @@ const isPasswordInvalid = ref(false)
 const onSubmit = async () => {
   let pwdRgx = /^[0-9a-zA-Z_-]{6,20}/
   let emailRgx = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9])+/
-  
+
   isEmailInvalid.value = !emailRgx.test(form.email)
   isPasswordInvalid.value = !pwdRgx.test(form.password)
-  
+
   if (isEmailInvalid.value) {
     ElMessage.info('邮箱格式不满足！')
     return
@@ -32,7 +32,7 @@ const onSubmit = async () => {
     ElMessage.info('密码格式不满足！')
     return
   }
-  
+
   try {
     let data = await authHttp.login(form.email, form.password)
     let token = data.access
@@ -85,8 +85,17 @@ const loginWithFacebook = () => {
   ElMessage.info('Facebook登录功能未实现')
 }
 
-const loginWithTwitter = () => {
-  ElMessage.info('Twitter登录功能未实现')
+const loginWithGithub = async () => {
+  try {
+    const { auth_url } = await authHttp.getGithubAuthUrl()
+    if (auth_url) {
+      window.location.href = auth_url
+    } else {
+      ElMessage.error('获取GitHub授权链接失败')
+    }
+  } catch (error) {
+    ElMessage.error('获取GitHub授权链接失败')
+  }
 }
 </script>
 
@@ -140,23 +149,16 @@ const loginWithTwitter = () => {
                   </button>
                 </div>
               </form>
-              <!-- <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p> -->
-              <!-- <div class="social d-flex text-center">
-                <a
-                  href="#"
-                  class="px-2 py-2 mr-md-1 rounded"
-                  @click.prevent="loginWithFacebook"
-                >
-                  <span class="ion-logo-facebook mr-2"></span> Facebook
-                </a>
+              <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
+              <div class="social d-flex text-center">
                 <a
                   href="#"
                   class="px-2 py-2 ml-md-1 rounded"
-                  @click.prevent="loginWithTwitter"
+                  @click.prevent="loginWithGithub"
                 >
-                  <span class="ion-logo-twitter mr-2"></span> Twitter
+                  <span class="ion-logo-twitter mr-2"></span> Github
                 </a>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -189,9 +191,16 @@ const loginWithTwitter = () => {
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
 }
 
 .form-control {

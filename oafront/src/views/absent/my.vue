@@ -100,7 +100,7 @@ onMounted(async () => {
     <el-card>
       <div class="header-container">
         <div class="left">
-          <el-button type="primary" @click="onShowDialog">
+          <el-button type="primary" @click="onShowDialog" v-permission="employee">
             <el-icon>
               <Plus />
             </el-icon>

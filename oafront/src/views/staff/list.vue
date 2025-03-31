@@ -36,7 +36,6 @@ async function fetchStaffList(page, page_size) {
     pagination.total = data.count
     pagination.page = page
     staffs.value = data.results
-    console.log(staffs.value)
   } catch (detail) {
     ElMessage.error(detail)
   }
@@ -69,7 +68,6 @@ watch(page_size, function (value) {
 })
 
 const onEditStaff = (index) => {
-  console.log(staffs.value[0])
   handleIndex = index
   dialogVisible.value = true
   let staff = staffs.value[index]

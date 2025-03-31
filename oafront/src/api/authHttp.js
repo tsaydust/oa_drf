@@ -20,9 +20,21 @@ const updateProfile = (data) => {
   return http.put(path, data)
 }
 
+const getGithubAuthUrl = () => {
+  const path = 'oaauth/github/login'
+  return http.get(path)
+}
+
+const handleGithubCallback = (code) => {
+  const path = `oaauth/github/callback?code=${code}`
+  return http.get(path)
+}
+
 export default {
   login,
   resetPwd,
   getProfile,
   updateProfile,
+  getGithubAuthUrl,
+  handleGithubCallback,
 }
