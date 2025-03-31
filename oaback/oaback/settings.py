@@ -140,7 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/www/staticfiles'
+STATIC_ROOT = BASE_DIR /'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
@@ -200,7 +200,7 @@ GITHUB_CLIENT_ID = env.str('GITHUB_CLIENT_ID', 'Ov23lijToy0eArJkqJD3')
 GITHUB_CLIENT_SECRET = env.str(
     'GITHUB_CLIENT_SECRET', '256a789842ccc5338f6ffa2ce0ca9af4e9387df8')
 GITHUB_CALLBACK_URL = env.str(
-    'GITHUB_CALLBACK_URL', 'http://localhost:5173/oaauth/github/callback')
+    'GITHUB_CALLBACK_URL', 'http://113.44.54.231/oaauth/github/callback')
 
 # 邮箱配置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
